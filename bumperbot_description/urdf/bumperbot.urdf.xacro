@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+
+
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="bumperbot">
+
+    <link name="base_footprint" />
+
+    <link name="base_link">
+        <visual>
+            <origin xyz="0 0 0" rpy="0 0 0"/>
+            <geometry>
+                <!-- Hazır mesh kullanımı-->
+                <mesh filename="package://bumperbot_descripiton/meshes/base_link.STL"/>
+            </geometry>
+        </visual>
+    </link>
+
+    <joint name="base_joint" type="fixed">
+        <parent link="base_footprint"/>
+        <child link="base_link"/>
+        <origin xyz="0 0 0.033" rpy="0 0 0"/>
+    </joint>
+
+</robot>
