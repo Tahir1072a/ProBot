@@ -1,0 +1,88 @@
+<?xml version="1.0"?>
+
+<robot name="bumperbot" xmlns:xacro="http://ros.org/wiki/xacro">
+
+    <!-- Wheels -->
+  <!-- 
+  Sol tekerlek için Gazebo fizik parametreleri.
+  Bu parametreler tekerleğin simülasyondaki davranışını kontrol eder.
+-->
+    <gazebo reference="wheel_left_link">
+        <!-- 
+        mu1: Yüzey sürtünme katsayısı (birincil yön).
+        Buradaki aşırı yüksek değer (1e15), tekerleğin yanal yönde KAYMASINI ENGELLER.
+        Gerçekçi değerler genellikle 0.5-1.5 aralığındadır.
+        -->
+        <mu1>1000000000000000.0</mu1>
+        
+        <!-- 
+        mu2: Yüzey sürtünme katsayısı (ikincil yön).
+        mu1 ile benzer ama dik yöndeki sürtünme. 
+        Burada da kaymayı önlemek için aşırı yüksek değer kullanılmış.
+        -->
+        <mu2>1000000000000000.0</mu2>
+        
+        <!-- 
+        kp: Temas sertliği katsayısı (penetrasyon direnci).
+        Yüksek değer, tekerleğin yüzeyde "sıkışmasını" önler.
+        Gerçekçi değerler ~1e6-1e9 arasındadır.
+        -->
+        <kp>1000000000000.0</kp>
+        
+        <!-- 
+        kd: Sönümleme katsayısı (enerji dağılımı).
+        Titreşimleri azaltır. Düşük değerler (10 gibi) daha gerçekçidir.
+        -->
+        <kd>10.0</kd>
+        
+        <!-- 
+        minDepth: Çarpışma tespiti için minimum penetrasyon derinliği (metre).
+        Bu değerden küçük penetrasyonlar göz ardı edilir.
+        0.001m = 1mm makul bir değerdir.
+        -->
+        <minDepth>0.001</minDepth>
+        
+        <!-- 
+        maxVel: Çarpışma çözücü için maksimum hız (m/s).
+        Düşük değerler (0.1 gibi) simülasyon kararlılığını artırır.
+        -->
+        <maxVel>0.1</maxVel>
+        
+        <!-- 
+        fdir1: Sürtünme yönü vektörü (x y z).
+        [1 0 0] = tekerleğin dönüş yönünde sürtünme uygular (X ekseni boyunca).
+        Bu, tekerleğin yanal kaymasını önlemek içindir.
+        -->
+        <fdir1>1 0 0</fdir1>
+    </gazebo>
+    
+    <gazebo reference="wheel_right_link">
+        <mu1>1000000000000000.0</mu1>
+        <mu2>1000000000000000.0</mu2>
+        <kp>1000000000000.0</kp>
+        <kd>10.0</kd>
+        <minDepth>0.001</minDepth>
+        <maxVel>0.1</maxVel>
+        <fdir1>1 0 0</fdir1>
+    </gazebo>
+
+    <!-- Caster Wheels -->
+    <gazebo reference="caster_rear_link">
+        <mu1>0.1</mu1>
+        <mu2>0.1</mu2>
+        <kp>1000000.0</kp>
+        <kd>100.0</kd>
+        <minDepth>0.001</minDepth>
+        <maxVel>1.0</maxVel>
+    </gazebo>
+    
+    <gazebo reference="caster_front_link">
+        <mu1>0.1</mu1>
+        <mu2>0.1</mu2>
+        <kp>1000000.0</kp>
+        <kd>100.0</kd>
+        <minDepth>0.001</minDepth>
+        <maxVel>1.0</maxVel>
+    </gazebo>
+
+</robot>
