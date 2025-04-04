@@ -25,7 +25,18 @@ def generate_launch_description():
                    "/controller_manager"
         ]
     )
+    
+    wheel_controller_spawner = Node(
+        package="controller_manager",
+        executable="spawner",
+        arguments=[
+            "bumperbot_controller",
+            "--controller-manager", 
+            "/controller_manager",
+        ]
+    )
 
+    """
     simple_controller = Node(
         package="controller_manager",
         executable="spawner",
@@ -34,7 +45,7 @@ def generate_launch_description():
                    "/controller_manager"
         ]
     )
-
+    
     simple_controller_py = Node(
         package="bumperbot_controller",
         executable="simple_controller.py",
@@ -43,11 +54,11 @@ def generate_launch_description():
             "wheel_seperation": wheel_seperation
         }]
     )
+    """
 
     return LaunchDescription([
         wheel_radius_arg,
         wheel_seperation_arg,
         joint_state_broadcaster_spawner,
-        simple_controller,
-        simple_controller_py,
+        wheel_controller_spawner
     ])
