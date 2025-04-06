@@ -21,6 +21,9 @@ setup(
     entry_points={
         'console_scripts': [
             "simple_parameters = bumperbot_py_examples_2.simple_parameters:main",
+            "simple_kinematics = bumperbot_py_examples_2.simple_kinematics:main",
+            "simple_service_server = bumperbot_py_examples_2.simple_service_server:main",
+            "simple_service_client = bumperbot_py_examples_2.simple_service_client:main"
         ],
     },
 )
