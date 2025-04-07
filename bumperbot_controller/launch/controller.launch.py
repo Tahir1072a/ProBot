@@ -5,6 +5,11 @@ from launch.substitutions import LaunchConfiguration
 
 def generate_launch_description():
 
+    use_sim_time_arg = DeclareLaunchArgument(
+        "use_sim_time",
+        default_value="True",
+    )
+
     wheel_radius_arg = DeclareLaunchArgument(
         "wheel_radius",
         default_value="0.033"
@@ -14,6 +19,7 @@ def generate_launch_description():
         default_value="0.17"
     )
 
+    use_sim_time = LaunchConfiguration("use_sim_time")
     wheel_radius = LaunchConfiguration("wheel_radius")
     wheel_seperation = LaunchConfiguration("wheel_seperation")
 
@@ -25,7 +31,7 @@ def generate_launch_description():
                    "/controller_manager"
         ]
     )
-    
+    """
     wheel_controller_spawner = Node(
         package="controller_manager",
         executable="spawner",
@@ -35,8 +41,9 @@ def generate_launch_description():
             "/controller_manager",
         ]
     )
-
     """
+
+    
     simple_controller = Node(
         package="controller_manager",
         executable="spawner",
@@ -51,14 +58,17 @@ def generate_launch_description():
         executable="simple_controller.py",
         parameters=[{
             "wheel_radius": wheel_radius,
-            "wheel_seperation": wheel_seperation
+            "wheel_seperation": wheel_seperation,
+            "use_sim_time": use_sim_time
         }]
     )
-    """
+    
 
     return LaunchDescription([
+        use_sim_time_arg,
         wheel_radius_arg,
         wheel_seperation_arg,
         joint_state_broadcaster_spawner,
-        wheel_controller_spawner
+        simple_controller,
+        simple_controller_py
     ])
