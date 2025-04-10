@@ -61,6 +61,9 @@ def generate_launch_description():
         arguments=[
             "/clock@rosgraph_msgs/msg/Clock[gz.msgs.Clock",
             "/imu@sensor_msgs/msg/Imu[gz.msgs.IMU"
+        ],
+        remappings=[
+            ("/imu", "/imu/out")
         ]
     )
 
